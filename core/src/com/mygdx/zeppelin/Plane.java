@@ -13,9 +13,9 @@ public class Plane extends Rectangle{
     public int getyAngle() {
         return yAngle;
     }
-/* public void updatePosition(float deltaTime) {
+ public void updatePosition(float deltaTime) {
         y -= yAngle * deltaTime;
         x -= 200 * deltaTime;
-    }*/
+    }
 }
 

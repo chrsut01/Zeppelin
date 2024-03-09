@@ -8,13 +8,13 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
 
-    final Zepp game;
+    final Boot game;
 
     OrthographicCamera camera;
 
     int screenWidth = GameConfig.SCREEN_WIDTH;
     int screenHeight = GameConfig.SCREEN_HEIGHT;
-    public MainMenuScreen(final Zepp game) {
+    public MainMenuScreen(final Boot game) {
         this.game = game;
 
         camera = new OrthographicCamera();

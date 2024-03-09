@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-public class Zepp extends Game {
+public class Boot extends Game {
 
     public SpriteBatch batch;
     public BitmapFont font;

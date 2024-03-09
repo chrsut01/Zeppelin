@@ -7,7 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -21,20 +21,23 @@ import java.util.Iterator;
 import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameScreen implements Screen {
-    final Zepp game;
+    final Boot game;
 
     Texture planeImage;
-    Texture zeppelinImage;
+    //Texture zeppelinImage;
 
     Texture scrollSkyImage1;
     Texture scrollSkyImage2;
 
     Sound planeFlyingSound;
     Sound planeCrashSound;
-    Music zepEngineSound;
+    //Music zepEngineSound;
     OrthographicCamera camera;
-    Rectangle zeppelin;
+    SpriteBatch batch;
+    //Rectangle zeppelin;
     Array<Plane> planes;
+
+    Zeppelin zeppelin;
     long lastPlaneTime;
     int planesHit;
     final float backgroundVelocity = 1;
@@ -44,12 +47,13 @@ public class GameScreen implements Screen {
     int screenWidth = GameConfig.SCREEN_WIDTH;
     int screenHeight = GameConfig.SCREEN_HEIGHT;
 
-    public GameScreen(final Zepp game) {
+    public GameScreen(final Boot game) {
         this.game = game;
+        this.batch = new SpriteBatch();
 
-        // load the images for the plane and the zeppelin
+        // load the images for the plane
         planeImage = new Texture(Gdx.files.internal("sopwith_camel_90x50_crop.png"));
-        zeppelinImage = new Texture(Gdx.files.internal("zeppelin_image1.png"));
+        //zeppelinImage = new Texture(Gdx.files.internal("zeppelin_image1.png"));
 
 
         scrollSkyImage1 = new Texture(Gdx.files.internal("scroll-Sky1.jpg"));
@@ -59,22 +63,22 @@ public class GameScreen implements Screen {
         planeCrashSound = Gdx.audio.newSound(Gdx.files.internal("plane_crash.mp3"));
 
         // load and loop zeppelin engine sound effect
-        zepEngineSound = Gdx.audio.newMusic(Gdx.files.internal("ZeppelinEngine.mp3"));
-        zepEngineSound.setLooping(true);
+       // zepEngineSound = Gdx.audio.newMusic(Gdx.files.internal("ZeppelinEngine.mp3"));
+       // zepEngineSound.setLooping(true);
 
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
 
-        // create a Rectangle to logically represent the zeppelin (original image: 965x195 pixels)
-        zeppelin = new Rectangle();
-        zeppelin.width = 723;
+        zeppelin = new Zeppelin(screenWidth / 2 - 723 / 2, screenHeight / 2 - 145 / 2, 723, 145);
+        //zeppelin = new Rectangle();
+       /* zeppelin.width = 723;
         zeppelin.height = 145;
         zeppelin.x = screenWidth / 2 - zeppelin.width / 2; // center the zeppelin horizontally
         zeppelin.y = screenHeight / 2 - zeppelin.height / 2;; // bottom left corner of the zeppelin is 20 pixels above
-        // the bottom screen edge
-
+        // the bottom screen edge*/
+        //zeppelin.playEngineSound();
 
         // create the planes array and spawn the first plane
         planes = new Array<>();
@@ -121,8 +125,10 @@ public class GameScreen implements Screen {
         game.font.draw(game.batch, "Planes hit: " + planesHit, 5, 475);
         // shows backgroundX
         game.font.draw(game.batch, "backgroundX: " + backgroundX, 5, 450);
+
+        //zeppelin.render(batch);
         // draw the zeppelin and all drops
-        game.batch.draw(zeppelinImage, zeppelin.x, zeppelin.y, zeppelin.width, zeppelin.height);
+        game.batch.draw(zeppelin.getZeppelinImage(), zeppelin.x, zeppelin.y, zeppelin.width, zeppelin.height);
         for (Rectangle plane : planes) {
             game.batch.draw(planeImage, plane.x, plane.y);
         }
@@ -134,7 +140,7 @@ public class GameScreen implements Screen {
             backgroundX = 0;
         }
 
-
+/*
 
         // process user input
         if (Gdx.input.isTouched()) {
@@ -163,7 +169,7 @@ public class GameScreen implements Screen {
         if (zeppelin.y < 0)
             zeppelin.y = 0;
         if (zeppelin.y > screenHeight - zeppelin.height)
-            zeppelin.y = screenHeight - zeppelin.height;
+            zeppelin.y = screenHeight - zeppelin.height;*/
 
         // check if we need to create a new plane
         if (TimeUtils.timeSinceMillis(lastPlaneTime) > 4000)
@@ -203,7 +209,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         // start the playback of the zeppelin engine sound effect when the screen is shown
-        zepEngineSound.play();
+        //zepEngineSound.play();
         lastPlaneTime = TimeUtils.millis() + 5000; // 5-second delay before planes start coming
 
     }
@@ -222,20 +228,25 @@ public class GameScreen implements Screen {
 
 
     public void update(){
-    if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
-        Gdx.app.exit();
+        // closes game if escape key is pressed
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+            Gdx.app.exit();
+
+        zeppelin.update();
 
     }
 
     @Override
     public void dispose() {
         planeImage.dispose();
-        zeppelinImage.dispose();
+        zeppelin.dispose();
         planeFlyingSound.dispose();
         planeCrashSound.dispose();
-        zepEngineSound.dispose();
+       // zepEngineSound.dispose();
         scrollSkyImage1.dispose();
         scrollSkyImage2.dispose();
+        batch.dispose();
+
     }
 
 }
