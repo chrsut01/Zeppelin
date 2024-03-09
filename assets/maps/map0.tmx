@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="8">
+ <tileset firstgid="1" source="../assets/maps/tiles.tsx"/>
+ <layer id="1" name="Background" width="20" height="10">
+  <data encoding="csv">
+5,5,5,5,5,5,106,0,0,0,6,5,0,6,105,0,6,0,0,6,
+0,5,0,5,105,105,0,0,105,0,0,0,0,105,106,6,0,0,102,0,
+0,111,0,0,0,105,0,0,0,0,5,5,0,0,0,0,105,105,0,0,
+0,0,0,0,111,0,0,0,104,104,104,0,0,6,6,0,0,101,105,0,
+111,0,3,3,3,3,0,104,14,3,3,3,3,3,106,6,0,0,105,105,
+0,0,0,0,0,105,102,0,0,0,0,0,0,106,106,0,104,2,2,2,
+0,4,0,5,101,0,0,111,0,0,0,104,111,0,0,0,0,2,2,106,
+3,4,0,0,0,0,106,0,0,111,104,0,0,5,13,0,0,2,111,2,
+2,104,2,5,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+1,1,1,1,1,1,1,105,1,1,1,1,1,105,1,1,1,1,1,111
+</data>
+ </layer>
+ <objectgroup id="2" name="objects">
+  <object id="1" x="1148.87" y="346.867"/>
+  <object id="4" x="615.539" y="342.857">
+   <ellipse/>
+  </object>
+  <object id="5" x="286.717" y="419.048"/>
+  <object id="6" x="469.173" y="148.371">
+   <polygon points="0,0 80.2005,36.0902 136.341,-58.1454"/>
+  </object>
+  <object id="7" x="94.2356" y="543.358"/>
+  <object id="8" x="38.0952" y="575.439">
+   <point/>
+  </object>
+  <object id="9" x="42.1053" y="617.544">
+   <polygon points="0,0 54.1353,-8.02005 6.01504,-30.0752"/>
+  </object>
+ </objectgroup>
+</map>

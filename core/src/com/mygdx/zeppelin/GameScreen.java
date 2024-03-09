@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -22,12 +23,12 @@ import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameScreen implements Screen {
     final Boot game;
-
+    private TileMapHelper tileMapHelper;
     Texture planeImage;
     //Texture zeppelinImage;
 
-    Texture scrollSkyImage1;
-    Texture scrollSkyImage2;
+    //Texture scrollSkyImage1;
+    //Texture scrollSkyImage2;
 
     Sound planeFlyingSound;
     Sound planeCrashSound;
@@ -46,18 +47,22 @@ public class GameScreen implements Screen {
 
     int screenWidth = GameConfig.SCREEN_WIDTH;
     int screenHeight = GameConfig.SCREEN_HEIGHT;
+    private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;  // e2
 
     public GameScreen(final Boot game) {
         this.game = game;
         this.batch = new SpriteBatch();
+
+        this.tileMapHelper = new TileMapHelper(this);  // e2, e3: parameter
+        this.orthogonalTiledMapRenderer = tileMapHelper.setupMap(); // e2
 
         // load the images for the plane
         planeImage = new Texture(Gdx.files.internal("sopwith_camel_90x50_crop.png"));
         //zeppelinImage = new Texture(Gdx.files.internal("zeppelin_image1.png"));
 
 
-        scrollSkyImage1 = new Texture(Gdx.files.internal("scroll-Sky1.jpg"));
-        scrollSkyImage2 = new Texture(Gdx.files.internal("scroll-Sky1.jpg"));
+        //scrollSkyImage1 = new Texture(Gdx.files.internal("scroll-Sky1.jpg"));
+        //scrollSkyImage2 = new Texture(Gdx.files.internal("scroll-Sky1.jpg"));
 
         planeFlyingSound = Gdx.audio.newSound(Gdx.files.internal("plane_flying.mp3"));
         planeCrashSound = Gdx.audio.newSound(Gdx.files.internal("plane_crash.mp3"));
@@ -117,8 +122,8 @@ public class GameScreen implements Screen {
         game.batch.begin();
 
         // draw the background
-        game.batch.draw(scrollSkyImage1,  backgroundX, backgroundY, 16384, 1856);
-        game.batch.draw(scrollSkyImage2,  backgroundX + 16384, backgroundY, 16384, 1856);
+        //game.batch.draw(scrollSkyImage1,  backgroundX, backgroundY, 16384, 1856);
+        //game.batch.draw(scrollSkyImage2,  backgroundX + 16384, backgroundY, 16384, 1856);
 
 
         // draw the Drops Collected score
@@ -242,9 +247,9 @@ public class GameScreen implements Screen {
         zeppelin.dispose();
         planeFlyingSound.dispose();
         planeCrashSound.dispose();
-       // zepEngineSound.dispose();
-        scrollSkyImage1.dispose();
-        scrollSkyImage2.dispose();
+                                        // zepEngineSound.dispose();
+        //scrollSkyImage1.dispose();
+        //scrollSkyImage2.dispose();
         batch.dispose();
 
     }
