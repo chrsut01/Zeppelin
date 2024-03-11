@@ -11,18 +11,32 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class Zeppelin extends Rectangle {
+    private static final float width = 783;
+    private static final float height = 109;
     private Texture zeppelinImage;
     private Sound engineSound;
-    int screenWidth = GameConfig.SCREEN_WIDTH;
-    int screenHeight = GameConfig.SCREEN_HEIGHT;
+    static float screenWidth = GameConfig.SCREEN_WIDTH;
+    static float screenHeight = GameConfig.SCREEN_HEIGHT;
 
-    public Zeppelin(float x, float y, float width, float height) {
-        super(x, y, width, height);
-        zeppelinImage = new Texture(Gdx.files.internal("zeppelin_image1.png"));
+
+    public Zeppelin() {
+        super(); // Call the default Rectangle constructor
+        init();
+    }
+    private void init() {
+        // Set default dimensions and position
+        set(screenWidth / 2 - width / 2, screenHeight / 2 - height / 2, width, height);
+
+        // Load textures and sounds
+        zeppelinImage = new Texture(Gdx.files.internal("Dirigibile-Zeppelin-L59.png"));
         engineSound = Gdx.audio.newSound(Gdx.files.internal("ZeppelinEngine.mp3"));
+
         playEngineSound(2.2f); // Set the initial volume (you can change this value)
     }
-
+   /* public static void setScreenDimensions(float width, float height) {
+        screenWidth = width;
+        screenHeight = height;
+    }*/
     public void update() {
         handleInput();
     }

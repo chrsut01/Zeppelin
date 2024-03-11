@@ -76,13 +76,9 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
 
-        zeppelin = new Zeppelin(screenWidth / 2 - 723 / 2, screenHeight / 2 - 145 / 2, 723, 145);
-        //zeppelin = new Rectangle();
-       /* zeppelin.width = 723;
-        zeppelin.height = 145;
-        zeppelin.x = screenWidth / 2 - zeppelin.width / 2; // center the zeppelin horizontally
-        zeppelin.y = screenHeight / 2 - zeppelin.height / 2;; // bottom left corner of the zeppelin is 20 pixels above
-        // the bottom screen edge*/
+        //zeppelin = new Zeppelin(screenWidth / 2 - 723 / 2, screenHeight / 2 - 145 / 2);
+        zeppelin = new Zeppelin();
+       // zeppelin.setScreenDimensions(screenWidth, screenHeight);
         //zeppelin.playEngineSound();
 
         // create the planes array and spawn the first plane
@@ -134,7 +130,7 @@ public class GameScreen implements Screen {
 
         //zeppelin.render(batch);
         // draw the zeppelin and all drops
-        game.batch.draw(zeppelin.getZeppelinImage(), zeppelin.x, zeppelin.y, zeppelin.width, zeppelin.height);
+        game.batch.draw(zeppelin.getZeppelinImage(), zeppelin.x, zeppelin.y, zeppelin.getWidth(), zeppelin.getHeight());
         for (Rectangle plane : planes) {
             game.batch.draw(planeImage, plane.x, plane.y);
         }
