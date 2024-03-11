@@ -22,7 +22,9 @@ public class TileMapHelper {
 
 
     public OrthogonalTiledMapRenderer setupMap() {
-        tiledMap = new TmxMapLoader().load("maps/map0.tmx");
+        //tiledMap = new TmxMapLoader().load("maps/map0.tmx");
+        tiledMap = new TmxMapLoader().load("maps/ZepMap1.tmx");
+
         parseMapObjects(tiledMap.getLayers().get("objects").getObjects());
         return new OrthogonalTiledMapRenderer(tiledMap);
     }

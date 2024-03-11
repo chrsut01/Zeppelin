@@ -28,6 +28,7 @@ public class Zeppelin extends Rectangle {
         set(screenWidth / 2 - width / 2, screenHeight / 2 - height / 2, width, height);
 
         // Load textures and sounds
+        //zeppelinImage = new Texture(Gdx.files.internal("zeppelin_image1.png"));
         zeppelinImage = new Texture(Gdx.files.internal("Dirigibile-Zeppelin-L59.png"));
         engineSound = Gdx.audio.newSound(Gdx.files.internal("ZeppelinEngine.mp3"));
 

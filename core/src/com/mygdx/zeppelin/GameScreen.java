@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
         this.orthogonalTiledMapRenderer = tileMapHelper.setupMap(); // e2
 
         // load the images for the plane
-        planeImage = new Texture(Gdx.files.internal("sopwith_camel_90x50_crop.png"));
+        planeImage = new Texture(Gdx.files.internal("sopwith_camel_small.png"));
         //zeppelinImage = new Texture(Gdx.files.internal("zeppelin_image1.png"));
 
 
@@ -105,7 +105,8 @@ public class GameScreen implements Screen {
         // arguments to clear are the red, green
         // blue and alpha component in the range [0,1]
         // of the color to be used to clear the screen.
-        ScreenUtils.clear(0, 0, 0.2f, 1);
+        //ScreenUtils.clear(0, 0, 0.2f, 1);  // makes screen very dark blue, almost black
+        ScreenUtils.clear(0.5f, 0.7f, 0.9f, 0.5f); // makes screen light blue
 
         // tell the camera to update its matrices.
         camera.update();
@@ -142,36 +143,6 @@ public class GameScreen implements Screen {
             backgroundX = 0;
         }
 
-/*
-
-        // process user input
-        if (Gdx.input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            zeppelin.x = touchPos.x - zeppelin.width / 2;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            zeppelin.x -= 30 * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            zeppelin.x += 30 * Gdx.graphics.getDeltaTime();
-
-        // make sure the zeppelin stays within the screen bounds right/left
-        if (zeppelin.x < 0)
-            zeppelin.x = 0;
-        if (zeppelin.x > screenWidth - zeppelin.width)
-            zeppelin.x = screenWidth - zeppelin.width;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.UP))
-            zeppelin.y += 30 * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            zeppelin.y -= 30 * Gdx.graphics.getDeltaTime();
-
-        // make sure the zeppelin stays within the screen bounds up/down
-        if (zeppelin.y < 0)
-            zeppelin.y = 0;
-        if (zeppelin.y > screenHeight - zeppelin.height)
-            zeppelin.y = screenHeight - zeppelin.height;*/
 
         // check if we need to create a new plane
         if (TimeUtils.timeSinceMillis(lastPlaneTime) > 4000)
