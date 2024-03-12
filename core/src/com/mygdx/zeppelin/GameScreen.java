@@ -3,6 +3,7 @@ package com.mygdx.zeppelin;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.physics.box2d.World;
 
 
 import java.util.Iterator;
@@ -34,6 +36,8 @@ public class GameScreen implements Screen {
     Sound planeCrashSound;
     //Music zepEngineSound;
     OrthographicCamera camera;
+
+    private World world;
     SpriteBatch batch;
     //Rectangle zeppelin;
     Array<Plane> planes;
@@ -199,6 +203,9 @@ public class GameScreen implements Screen {
     public void resume() {
     }
 
+    public World getWorld() {
+        return world;
+    }
 
     public void update(){
         // closes game if escape key is pressed

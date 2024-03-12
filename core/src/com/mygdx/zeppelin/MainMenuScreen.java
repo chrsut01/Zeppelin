@@ -3,6 +3,7 @@ package com.mygdx.zeppelin;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -35,8 +36,13 @@ public class MainMenuScreen implements Screen {
 
         game.batch.begin();
 
-        game.font.draw(game.batch, "Welcome to Arika-Schiff!!! ", 100, 150);
-        game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+
+        game.font.draw(game.batch, "Welcome to Arika-Schiff!!! ", screenWidth / 2 -200, screenHeight / 2 + 25);
+        game.font.draw(game.batch, "Hit the spacebar to begin!", screenWidth / 2 - 200, screenHeight / 2 - 50);
+        // Set the font size
+        game.font.getData().setScale(2f); // Adjust 2f to your desired scale
+        // Set the font color (optional)
+        game.font.setColor(Color.WHITE); // Adjust Color.WHITE to your desired color
         game.batch.end();
 
       /*  if (Gdx.input.isTouched()) {
